@@ -1,52 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Javascript asynchronous</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header><nav>
-        <main>
-            <h2>JV BLOG</h2>
-        </main>
-    </nav></header>
-    <main class="bg-[#FFF587] w-5/6 mx-auto">
-        <article>
-            <h1>Javascript Asynchronous</h1>
-            <span>Written by Julian Almario * <time datetime=""></time></span>
-            <img src="img/JV.png" alt="Javascript asynchronous">
-            <p>JavaScript is characterized as a non-blocking and synchronous language, which means that tasks are executed one after another, and a new task won't begin until the current one finishes. However, sometimes a task needs an event to occur before it can be executed, requiring asynchronous work, and this is where JavaScript Async comes in. When working with an asynchronous language, we talk about a blocking language, meaning a task can be running while another task waits for a certain event to occur before it can execute. This is essentially what JavaScript Async is; when it encounters a task dependent on an event, it puts it in a pending tasks list, allowing it to continue executing other tasks while waiting for that event. Once the necessary event happens, the task is then executed. You can have multiple asynchronous tasks, but it's important to note that they don’t have a defined completion time and that there may be dependencies between tasks. If there are dependencies, a certain order must be followed.
 
-                There are different methods to manage asynchrony, which will be presented below.</p>
-            <h2>Callbacks</h2>
-            <p>Callbacks are functions passed as parameters to other functions. These are then invoked within the other function to perform an action or routine. Callbacks are mostly used for asynchronous operations.</p>
-            <h2>Promise</h2>
-            <p> promise is an object whose value might not be immediately known upon creation. However, in the future, its value can change to one of three outcomes:</p>        
-            <ul>
-                <li><b>Fulfilled promise:</b> Means that the operation or task was completed successfully.</li>
-                <li><b>Rejected promise: </b>Means that the operation or task was not completed.</li>
-                <li><b>Pending promise:</b> Means that it is neither fulfilled nor rejected yet.</li>
-            </ul>
-            <h3>Methods</h3>
-            <ul>
-                <li><b>then():</b> Executes when the promise is fulfilled, invoking the resolve callback function.</li>
-                <li><b>catch():</b> Executes when the promise is rejected, invoking the reject callback function.</li>
-                <li><b>finally():</b> Executes regardless of whether the promise is fulfilled or rejected, invoking the end callback function.</li>
-            </ul>
-            <h3>Composite Methods</h3>
-            <ul>
-                <li><b>Promise.all():</b> Waits for all promises to be fulfilled. If one promise is rejected, the entire set is rejected.</li>
-                <li><b>Promise.race():</b> Returns the first promise that resolves, regardless of whether it is fulfilled or rejected.</li>
-                <li><b>Promise.allSettled():</b> Waits for all promises to complete, regardless of their outcome.</li>
-            </ul>
-            <p>As a final note is that promises can be chained using then.</p>
-            <h2>Async/Await</h2>
-            <p>This is a way to handle promises in a synchronous manner. The await keyword allows you to pause execution, meaning the code won’t continue until a promise is fulfilled, making it a blocking operation. However, there’s an issue: you can’t use await in a synchronous function, as it will throw an error. This is where async comes into play, which defines a function as asynchronous. In some cases, where two promises need to be handled, then can be used for the first promise and await for the second. To handle errors or rejected promises in async/await, you should use try/catch</p>
-             <h2>Event Loop</h2>
-             <p>JavaScript is a single-threaded language, meaning it only allows one function or task to run at a time. The Event Loop allows it to manage and execute multiple tasks concurrently. JavaScript uses a call stack to store the functions currently being executed. If an asynchronous function is being executed, it won’t go to the stack but rather to the browser or another underlying engine. When an asynchronous operation finishes, its callback goes to the callback queue. The Event Loop monitors the call stack and the callback queue, ensuring that when the call stack is empty, it takes the first function from the callback queue and moves it to the call stack for execution. The Event Loop continuously repeats this process, allowing the language to handle multiple asynchronous tasks.</p>
+<body class="bg-[#E4E1E1] font-serif">
+    <header class="m-0 w-full">
+        <nav class="bg-[#FFD900] w-full">
+            <main>
+                <h2 class="text-5xl text-center my-auto"><b>JS BLOG</b></h2>
+            </main>
+        </nav>
+    </header>
+    <main class="bg-[#FFF587] w-9/12 mx-auto p-4">
+        <article>
+            <h1 class="text-6xl mb-2 font-extrabold">Javascript Asynchronous</h1>
+            <span class="text-sm">Written by Julian Almario *
+                <time datetime="2024-09-06">September 6/2024</time></span>
+            <section>
+                <figure >
+                    <img class="w-80 h-72 mx-auto my-4" src="img/JV.png" alt="Javascript asynchronous" />
+                </figure>
+                <p>
+                    JavaScript is characterized as a non-blocking and synchronous
+                    language, which means that tasks are executed one after another, and
+                    a new task won't begin until the current one finishes. However,
+                    sometimes a task needs an event to occur before it can be executed,
+                    requiring asynchronous work, and this is where JavaScript Async
+                    comes in. When working with an asynchronous language, we talk about
+                    a blocking language, meaning a task can be running while another
+                    task waits for a certain event to occur before it can execute. This
+                    is essentially what JavaScript Async is; when it encounters a task
+                    dependent on an event, it puts it in a pending tasks list, allowing
+                    it to continue executing other tasks while waiting for that event.
+                    Once the necessary event happens, the task is then executed. You can
+                    have multiple asynchronous tasks, but it's important to note that
+                    they don’t have a defined completion time and that there may be
+                    dependencies between tasks. If there are dependencies, a certain
+                    order must be followed. There are different methods to manage
+                    asynchrony, which will be presented below. Here is a difference between an
+                    sinchronous code and a asichronous code:
+                <div class="flex">
+                    <pre class="bg-[#2D2D2D] text-[#FFF587] w-11/12 mx-auto my-2 h-9/12 rounded-sm">
+                    <h3 class="text-3xl text-center text-[#FFD900] border-b-2 
+                    border-solid border-[#FFD900]">Sinchronous</h3>
+                    <code>
+  function fetchDataSync() {
+  let data = {
+  name: 'John',
+  age: 30,
+  profession: 'Engineer'
+  };
+
+  console.log('Synchronous data:', data);
+           
+  return data;
+ }
+
+ // Call the synchronous function
+ const result = fetchDataSync();
+ console.log('Result:', result);
+                    </code>
+                </pre>
+                    <pre class="bg-[#2D2D2D] text-[#FFF587] w-11/12 mx-auto my-2 h-9/12 
+                        rounded-sm border-l-4 border-l-solid border-l-[#FFD900]">
+                    <h3 class="text-3xl text-center text-[#FFD900] border-b-2 
+                    border-solid border-[#FFD900]">Asinchronous</h3>
+                    <code>
+  async function fetchDataAsync() {
+  let data = new Promise((resolve) => {
+  // Simulate a delay of 2 seconds 
+  setTimeout(() => {
+  resolve({
+  name: 'John',
+  age: 30,
+  profession: 'Engineer'
+  });
+  }, 2000);
+  });
+
+  // Await the data to be resolved
+  let result = await data;
+
+   // Log the data after it is fetched
+   console.log('Asynchronous data:', result);
+
+   return result;
+    }  
+
+    // Call the asynchronous function
+    fetchDataAsync().then(result => {
+    console.log('Result:', result);
+    });
+                    </code>
+                </pre>
+                </div>
+                </p>
+            </section>
+            <section class="mt-3">
+                <h2 class="text-4xl mt-2 mb-1 font-bold">Callbacks</h2>
+                <p>
+                    Callbacks are functions passed as parameters to other functions.
+                    These are then invoked within the other function to perform an
+                    action or routine. Callbacks are mostly used for asynchronous
+                    operations and are useful to indicate than when this task is finish run this function.
+                    However, nest many callback will lead to a code very difficult to read, so their are other tools
+                    usefull to handle callbacks.Here is an example of a callback:
+                </p>
+                <pre class="bg-[#2D2D2D] text-[#FFF587] w-11/12 mx-auto my-2 h-9/12 rounded-sm">
+            <code>
+    // Function that takes two numbers and a callback function
+    function processNumbers(a, b, callback) {
+    // Simulate some operation with the numbers
+    let result = a + b;
+    
+    // Call the callback function, passing the result as an argument
+    callback(result);
+   }
+
+   // Callback function that prints the result
+   function displayResult(result) {
+   console.log('The result is:', result);
+   }
+
+   // Call the function, passing two numbers and the callback
+   processNumbers(5, 10, displayResult);
+            </code>
+          </pre>
+            </section>
+            <section class="mt-3">
+                <h2 class="text-4xl mb-1 font-bold">Promise</h2>
+                <p>
+                    Promise is an object whose value might not be immediately known upon
+                    creation. However, in the future, its value can change to one of
+                    three outcomes:
+                </p>
+                <ul class="my-2">
+                    <li>
+                        <b>Fulfilled promise:</b> Means that the operation or task was
+                        completed successfully.
+                    </li>
+                    <li>
+                        <b>Rejected promise: </b>Means that the operation or task was not
+                        completed.
+                    </li>
+                    <li>
+                        <b>Pending promise:</b> Means that it is neither fulfilled nor
+                        rejected yet.
+                    </li>
+                </ul>
+                <h3 class="text-2xl mt-2 mb-1">Methods</h3>
+                <ul class="my-2">
+                    <li>
+                        <b>then():</b> Executes when the promise is fulfilled, invoking
+                        the resolve callback function.
+                    </li>
+                    <li>
+                        <b>catch():</b> Executes when the promise is rejected, invoking
+                        the reject callback function.
+                    </li>
+                    <li>
+                        <b>finally():</b> Executes regardless of whether the promise is
+                        fulfilled or rejected, invoking the end callback function.
+                    </li>
+                </ul>
+                <h3 class="text-2xl mt-2 mb-1">Compound Methods</h3>
+                <ul class="my-2">
+                    <li>
+                        <b>Promise.all():</b> Waits for all promises to be fulfilled. If
+                        one promise is rejected, the entire set is rejected.
+                    </li>
+                    <li>
+                        <b>Promise.race():</b> Returns the first promise that resolves,
+                        regardless of whether it is fulfilled or rejected.
+                    </li>
+                    <li>
+                        <b>Promise.allSettled():</b> Waits for all promises to complete,
+                        regardless of their outcome.
+                    </li>
+                </ul>
+                <p>
+                    As a final note is that promises can be chained using then. Here is
+                    a example of a promise in code:
+                </p>
+                <pre class="bg-[#2D2D2D] text-[#FFF587] w-11/12 mx-auto my-2 h-9/12 rounded-sm">
+            <code class="m-0">
+    // Create a new Promise object
+    const promise = new Promise((resolve, reject) => {
+    
+    let success = true; // Set to 'false' to simulate a failure scenario.
+    
+    // If the operation was successful:
+    if (success) {
+        // Call resolve() to indicate that the promise has been fulfilled successfully.
+        resolve("The operation was successful");
+    } else {
+        // Call reject() to indicate that the promise has failed.
+        reject("An error occurred");
+    }
+    });
+
+   // Consuming the promise
+   promise
+    .then((result) => {
+        // This block runs when the promise is resolved successfully.
+        console.log(result);
+    })
+    .catch((error) => {
+        // This block runs if the promise is rejected (if an error occurs).
+        console.error(error); 
+    });
+            </code>
+        </pre>
+            </section>
+            <section class="mt-3">
+                <h2 class="text-4xl my-1 font-bold">Async/Await</h2>
+                <p>
+                    This is a way to handle promises in a synchronous manner. The await
+                    keyword allows you to pause execution, meaning the code won’t
+                    continue until a promise is fulfilled, making it a blocking
+                    operation. However, there’s an issue: you can’t use await in a
+                    synchronous function, as it will throw an error. This is where async
+                    comes into play, which defines a function as asynchronous. In some
+                    cases, where two promises need to be handled, then can be used for
+                    the first promise and await for the second. To handle errors or
+                    rejected promises in async/await, you should use try/catch. This is an example of a Async/Await:
+                </p>
+                <pre class="bg-[#2D2D2D] text-[#FFF587] w-11/12 mx-auto my-2 h-9/12 rounded-sm">
+            <code>
+   // A function that returns a promise after a delay
+   function fetchData() {
+     return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const success = true;  // Simulate success or failure
+            if (success) {
+                resolve("Data fetched successfully");
+            } else {
+                reject("Error fetching data");
+            }
+        }, 2000);  // Simulate a 2-second delay
+     });
+    }
+
+    // Async function to use the promise
+    async function getData() {
+     try {
+         console.log("Fetching data...");
+         const result = await fetchData();  // Wait for the promise to resolve
+         console.log(result);  // Log the success message
+     } catch (error) {
+         console.error(error);  // Handle any errors
+     }
+    }
+
+    getData();  // Call the async function
+                </code>
+        </pre>
+            </section>
+
+            <section class="mt-3">
+                <h2 class="text-4xl mt-2 mb-1 font-bold">Event Loop</h2>
+                <p>
+                    JavaScript is a single-threaded language, meaning it only allows one
+                    function or task to run at a time. The Event Loop allows it to
+                    manage and execute multiple tasks concurrently. JavaScript uses a
+                    call stack to store the functions currently being executed. If an
+                    asynchronous function is being executed, it won’t go to the stack
+                    but rather to the browser or another underlying engine. When an
+                    asynchronous operation finishes, its callback goes to the callback
+                    queue. The Event Loop monitors the call stack and the callback
+                    queue, ensuring that when the call stack is empty, it takes the
+                    first function from the callback queue and moves it to the call
+                    stack for execution. The Event Loop continuously repeats this
+                    process, allowing the language to handle multiple asynchronous
+                    tasks. This is an example of a application of Event Loop:
+                </p>
+                <pre class="bg-[#2D2D2D] text-[#FFF587] w-11/12 mx-auto my-2 h-9/12 rounded-sm"></pre>
+                <code>
+                </code>
+                </pre>
+            </section>
+            </section>
         </article>
     </main>
 </body>
+
 </html>
