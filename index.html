@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript asynchronous</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header><nav>
+        <main>
+            <h2>JV BLOG</h2>
+        </main>
+    </nav></header>
+    <main class="bg-[#FFF587] w-5/6 mx-auto">
+        <article>
+            <h1>Javascript Asynchronous</h1>
+            <span>Written by Julian Almario * <time datetime=""></time></span>
+            <img src="img/JV.png" alt="Javascript asynchronous">
+            <p>JavaScript is characterized as a non-blocking and synchronous language, which means that tasks are executed one after another, and a new task won't begin until the current one finishes. However, sometimes a task needs an event to occur before it can be executed, requiring asynchronous work, and this is where JavaScript Async comes in. When working with an asynchronous language, we talk about a blocking language, meaning a task can be running while another task waits for a certain event to occur before it can execute. This is essentially what JavaScript Async is; when it encounters a task dependent on an event, it puts it in a pending tasks list, allowing it to continue executing other tasks while waiting for that event. Once the necessary event happens, the task is then executed. You can have multiple asynchronous tasks, but it's important to note that they don’t have a defined completion time and that there may be dependencies between tasks. If there are dependencies, a certain order must be followed.
+
+                There are different methods to manage asynchrony, which will be presented below.</p>
+            <h2>Callbacks</h2>
+            <p>Callbacks are functions passed as parameters to other functions. These are then invoked within the other function to perform an action or routine. Callbacks are mostly used for asynchronous operations.</p>
+            <h2>Promise</h2>
+            <p> promise is an object whose value might not be immediately known upon creation. However, in the future, its value can change to one of three outcomes:</p>        
+            <ul>
+                <li><b>Fulfilled promise:</b> Means that the operation or task was completed successfully.</li>
+                <li><b>Rejected promise: </b>Means that the operation or task was not completed.</li>
+                <li><b>Pending promise:</b> Means that it is neither fulfilled nor rejected yet.</li>
+            </ul>
+            <h3>Methods</h3>
+            <ul>
+                <li><b>then():</b> Executes when the promise is fulfilled, invoking the resolve callback function.</li>
+                <li><b>catch():</b> Executes when the promise is rejected, invoking the reject callback function.</li>
+                <li><b>finally():</b> Executes regardless of whether the promise is fulfilled or rejected, invoking the end callback function.</li>
+            </ul>
+            <h3>Composite Methods</h3>
+            <ul>
+                <li><b>Promise.all():</b> Waits for all promises to be fulfilled. If one promise is rejected, the entire set is rejected.</li>
+                <li><b>Promise.race():</b> Returns the first promise that resolves, regardless of whether it is fulfilled or rejected.</li>
+                <li><b>Promise.allSettled():</b> Waits for all promises to complete, regardless of their outcome.</li>
+            </ul>
+            <p>As a final note is that promises can be chained using then.</p>
+            <h2>Async/Await</h2>
+            <p>This is a way to handle promises in a synchronous manner. The await keyword allows you to pause execution, meaning the code won’t continue until a promise is fulfilled, making it a blocking operation. However, there’s an issue: you can’t use await in a synchronous function, as it will throw an error. This is where async comes into play, which defines a function as asynchronous. In some cases, where two promises need to be handled, then can be used for the first promise and await for the second. To handle errors or rejected promises in async/await, you should use try/catch</p>
+             <h2>Event Loop</h2>
+             <p>JavaScript is a single-threaded language, meaning it only allows one function or task to run at a time. The Event Loop allows it to manage and execute multiple tasks concurrently. JavaScript uses a call stack to store the functions currently being executed. If an asynchronous function is being executed, it won’t go to the stack but rather to the browser or another underlying engine. When an asynchronous operation finishes, its callback goes to the callback queue. The Event Loop monitors the call stack and the callback queue, ensuring that when the call stack is empty, it takes the first function from the callback queue and moves it to the call stack for execution. The Event Loop continuously repeats this process, allowing the language to handle multiple asynchronous tasks.</p>
+        </article>
+    </main>
+</body>
+</html>
