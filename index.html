@@ -22,8 +22,8 @@
             <span class="text-sm">Written by Julian Almario *
                 <time datetime="2024-09-06">September 6/2024</time></span>
             <section>
-                <figure >
-                    <img class="w-80 h-72 mx-auto my-4" src="img/JV.png" alt="Javascript asynchronous" />
+                <figure class="border-3 border-solid border-[#000]">
+                    <img class="w-72 h-72 mx-auto my-4" src="img/JV.png" alt="Javascript asynchronous" />
                 </figure>
                 <p>
                     JavaScript is characterized as a non-blocking and synchronous
@@ -277,10 +277,35 @@
                     first function from the callback queue and moves it to the call
                     stack for execution. The Event Loop continuously repeats this
                     process, allowing the language to handle multiple asynchronous
-                    tasks. This is an example of a application of Event Loop:
+                    tasks. In addition, it also exit the microtask queque, that have more priority than the queque
+                    task.This is an example of a application of Event Loop:
                 </p>
-                <pre class="bg-[#2D2D2D] text-[#FFF587] w-11/12 mx-auto my-2 h-9/12 rounded-sm"></pre>
+                <pre class="pl-3 bg-[#2D2D2D] text-[#FFF587] w-11/12 mx-auto my-2 h-9/12 rounded-sm">
                 <code>
+console.log('Synchronous code starts'); //Run #1
+
+// Task added to the task queue (will execute after microtasks)
+setTimeout(() => {
+    console.log('Timeout callback executed (task queue)'); //Run #6
+}, 0);
+
+// Task added to the microtask queue (will execute after synchronous code)
+Promise.resolve()
+    .then(() => {
+        console.log('Promise resolved (microtask queue)'); //Run #4
+    })
+    .then(() => {
+        console.log('Another promise then handler (microtask queue)'); //Run #5
+    });
+
+// A synchronous callback added to the call stack
+function syncCallback() {
+    console.log('Synchronous function executed'); //Run #2
+}
+syncCallback();
+
+console.log('Synchronous code ends'); //Run #3
+
                 </code>
                 </pre>
             </section>
